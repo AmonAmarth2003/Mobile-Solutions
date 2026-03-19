@@ -22,6 +22,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.example.calculator.ui.theme.CalculatorTheme
 
 
@@ -44,10 +45,7 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
+    GreetingPreview()
 }
 
 @Preview(showBackground = true)
@@ -55,12 +53,20 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
 fun GreetingPreview() {
     CalculatorTheme {
 
-        val topBoxColor = 0xFF000000
+        val topBoxColor    = 0xFF000000
         val bottomBoxColor = 0xFF444444
-        val buttonColor = 0xFF465C91
+        val buttonColor    = 0xFF465C91
 
         Column()
         {
+            // Just a header
+            Box(modifier = Modifier
+                .background(Color(buttonColor))
+                .height(20.dp)
+                .fillMaxWidth()
+            ){}
+
+
             Box(
                 modifier = Modifier
                     .background(Color(topBoxColor)) // Black background
@@ -69,7 +75,7 @@ fun GreetingPreview() {
             )
             {
 
-                Text(text = "0", color = Color(0xFFFFFFFF))
+                Text(text = "0", color = Color(0xFFFFFFFF), fontSize = 100.sp)
             }
 
             Box(
