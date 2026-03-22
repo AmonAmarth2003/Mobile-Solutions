@@ -25,6 +25,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
+import androidx.compose.ui.text.PlatformTextStyle
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.style.LineHeightStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
@@ -57,6 +60,9 @@ data class ButtonStyles(
     val fontSize: TextUnit
 )
 
+var equation : String? = null
+var result : Int? = null
+
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {
@@ -85,22 +91,47 @@ fun GreetingPreview() {
     }
 }
 
+
 @Composable
-fun Screen(screenColor : Color){
+fun Screen(screenColor: Color) {
+    val displayStyle = TextStyle(
+        fontSize = 70.sp,
+        platformStyle = PlatformTextStyle(includeFontPadding = false),
+        lineHeight = 70.sp,
+        lineHeightStyle = LineHeightStyle(
+            alignment = LineHeightStyle.Alignment.Center,
+            trim = LineHeightStyle.Trim.Both
+        )
+    )
+
     Box(
         modifier = Modifier
             .background(screenColor)
             .height(200.dp)
             .fillMaxWidth(),
         contentAlignment = Alignment.TopEnd
-    ){
-        Text(
-            text = "0",
-            color = Color(0xFFFFFFFF),
-            fontSize = 70.sp
-        )
+    ) {
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(end = 16.dp),
+            horizontalAlignment = Alignment.End,
+            verticalArrangement = Arrangement.spacedBy(0.dp)
+        ) {
+            Text(
+                text = if (equation != null) "$equation" else "0",
+                style = displayStyle,
+                color = Color.White
+            )
+            Text(
+                text = if (result != null) "= $result" else "",
+                style = displayStyle,
+                color = Color.White
+            )
+        }
     }
 }
+
 
 @Composable
 fun TouchPad(buttonsStyles: ButtonStyles, backgroundColor : Color){
