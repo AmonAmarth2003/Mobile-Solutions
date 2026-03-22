@@ -8,14 +8,16 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
-import androidx.compose.material3.Scaffold
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -32,19 +34,14 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             CalculatorTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
-                }
+                Greeting()
             }
         }
     }
 }
 
 @Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
+fun Greeting() {
     GreetingPreview()
 }
 
@@ -53,15 +50,15 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
 fun GreetingPreview() {
     CalculatorTheme {
 
-        val topBoxColor    = 0xFF000000
-        val bottomBoxColor = 0xFF444444
-        val buttonColor    = 0xFF465C91
+        val screenColor    = Color(0xFF000000)
+        val bottomBoxColor = Color(0xFF444444)
+        val primaryColor   = Color(0xFF465C91)
 
         Column()
         {
             // Just a header
             Box(modifier = Modifier
-                .background(Color(buttonColor))
+                .background(primaryColor)
                 .height(20.dp)
                 .fillMaxWidth()
             ){}
@@ -69,7 +66,7 @@ fun GreetingPreview() {
 
             Box(
                 modifier = Modifier
-                    .background(Color(topBoxColor)) // Black background
+                    .background(screenColor) // Black background
                     .height(200.dp)
                     .fillMaxWidth()
             )
@@ -78,193 +75,82 @@ fun GreetingPreview() {
                 Text(text = "0", color = Color(0xFFFFFFFF), fontSize = 100.sp)
             }
 
-            Box(
-                modifier = Modifier
-                    .background(Color(bottomBoxColor)) // Dark grey background
-                    .fillMaxSize()
+            TouchPad(
+                primaryColor,
+                bottomBoxColor
             )
-            {
-                Column(modifier = Modifier
-                    .fillMaxSize(),
-                    verticalArrangement = Arrangement.SpaceBetween
-                )
-                {
-                    // 1st row
-                    Row(modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.SpaceBetween
-                    )
-                    {
-                        Button(
-                            onClick = {}, modifier = Modifier
-                                .background(Color(buttonColor))
-                                .weight(1f)
-                        ) {
-                            Text("7")
-                        }
-
-                        Button(
-                            onClick = {}, modifier = Modifier
-                                .background(Color(buttonColor))
-                                .weight(1f)
-                        ) {
-                            Text("8")
-                        }
-
-                        Button(
-                            onClick = {},
-                            modifier = Modifier
-                                .background(Color(buttonColor))
-                                .weight(1f)
-                                .weight(1f)
-                        ) {
-                            Text("9")
-                        }
-
-                        Button(
-                            onClick = {},
-                            modifier = Modifier
-                                .background(Color(buttonColor))
-                                .weight(1f)
-                        ) {
-                            Text("/")
-                        }
-                    }
-
-                    // 2nd row
-                    Row(
-                        modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.SpaceBetween
-                    )
-                    {
-
-                        Button(
-                            onClick = {},
-                            modifier = Modifier
-                                .background(Color(buttonColor))
-                                .weight(1f)
-                        ) {
-                            Text("4")
-                        }
-
-                        Button(
-                            onClick = {},
-                            modifier = Modifier
-                                .background(Color(buttonColor))
-                                .weight(1f)
-                        ) {
-                            Text("5")
-                        }
-
-                        Button(
-                            onClick = {},
-                            modifier = Modifier
-                                .background(Color(buttonColor))
-                                .weight(1f)
-                        ) {
-                            Text("6")
-                        }
-
-                        Button(
-                            onClick = {},
-                            modifier = Modifier
-                                .background(Color(buttonColor))
-                                .weight(1f)
-                        ) {
-                            Text("*")
-                        }
-                    }
-
-                    // 3rd row
-                    Row(
-                        modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.SpaceBetween
-                    )
-                    {
-
-                        Button(
-                            onClick = {},
-                            modifier = Modifier
-                                .background(Color(buttonColor))
-                                .weight(1f)
-                        ) {
-                            Text("1")
-                        }
-
-                        Button(
-                            onClick = {},
-                            modifier = Modifier
-                                .background(Color(buttonColor))
-                                .weight(1f)
-                        ) {
-                            Text("2")
-                        }
-
-                        Button(
-                            onClick = {},
-                            modifier = Modifier
-                                .background(Color(buttonColor))
-                                .weight(1f)
-                        ) {
-                            Text("3")
-                        }
-
-                        Button(
-                            onClick = {},
-                            modifier = Modifier
-                                .background(Color(buttonColor))
-                                .weight(1f)
-                        ) {
-                            Text("-")
-                        }
-                    }
-
-                    // 4th row
-                    Row(
-                        modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.SpaceBetween
-                    )
-                    {
-
-                        Button(
-                            onClick = {},
-                            modifier = Modifier
-                                .background(Color(buttonColor))
-                                .weight(1f)
-                        ) {
-                            Text("0")
-                        }
-
-                        Button(
-                            onClick = {},
-                            modifier = Modifier
-                                .background(Color(buttonColor))
-                                .weight(1f)
-                        ) {
-                            Text("C")
-                        }
-
-                        Button(
-                            onClick = {},
-                            modifier = Modifier
-                                .background(Color(buttonColor))
-                                .weight(1f)
-                        ) {
-                            Text("=")
-                        }
-
-                        Button(
-                            onClick = {},
-                            modifier = Modifier
-                                .background(Color(buttonColor))
-                                .weight(1f)
-                        ) {
-                            Text("+")
-                        }
-                    }
-                }
-
-
-            }
         }
+    }
+}
+
+
+enum class DisplayOrder(val index: Int){
+    FIRST(0),
+    SECOND(1),
+    THIRD(2),
+    FOURTH(3)
+}
+
+@Composable
+fun TouchPad(buttonsColor: Color, backgroundColor : Color){
+    val buttonsText = arrayOf(
+        arrayOf("7", "8", "9", "/"),
+        arrayOf("4", "5", "6", "*"),
+        arrayOf("1", "2", "3", "-"),
+        arrayOf("0", "C", "=", "+")
+    )
+
+    Box(
+        modifier = Modifier
+            .background(backgroundColor)
+            .fillMaxSize()
+    ){
+        Column(modifier = Modifier
+            .fillMaxSize(),
+            verticalArrangement = Arrangement.SpaceBetween
+        )
+        {
+            // matrix[row][col]
+            CalculatorRow(buttonsColor,buttonsText[DisplayOrder.FIRST.index])
+            CalculatorRow(buttonsColor,buttonsText[DisplayOrder.SECOND.index])
+            CalculatorRow(buttonsColor,buttonsText[DisplayOrder.THIRD.index])
+            CalculatorRow(buttonsColor,buttonsText[DisplayOrder.FOURTH.index])
+        }
+    }
+}
+
+@Composable
+fun ColumnScope.CalculatorRow(buttonsColor: Color, texts: Array<String>){
+    Row(modifier = Modifier
+        .fillMaxWidth()
+        .weight(1f),
+        horizontalArrangement = Arrangement.SpaceBetween
+    )
+    {
+        CalculatorButton(buttonsColor, texts[DisplayOrder.FIRST.index])
+        CalculatorButton(buttonsColor, texts[DisplayOrder.SECOND.index])
+        CalculatorButton(buttonsColor, texts[DisplayOrder.THIRD.index])
+        CalculatorButton(buttonsColor, texts[DisplayOrder.FOURTH.index])
+    }
+}
+
+
+@Composable
+fun RowScope.CalculatorButton(
+    buttonColor: Color,
+    text: String,
+    onClick: () -> Unit = {}
+) {
+    Button(
+        onClick = onClick,
+        modifier = Modifier
+            .weight(1f)
+            .fillMaxHeight(),
+        shape = RoundedCornerShape(50.dp),
+        colors = ButtonDefaults.buttonColors(
+            containerColor = buttonColor
+        )
+    ) {
+        Text(text = text, fontSize = 50.sp)
     }
 }
